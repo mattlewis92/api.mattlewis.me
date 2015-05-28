@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/mattlewis92/api.mattlewis.me#readme",
   "dependencies": {
-    "express": "~4.12.4"
+    "express": "~4.12.4",
+    "newrelic": "~1.19.2"
   },
   "engines": {
     "node": "~0.12.0"
