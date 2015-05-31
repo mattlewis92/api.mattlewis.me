@@ -6,6 +6,6 @@ var app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use('/', require('./routes'));
+app.use('/me', require('./routes'));
 
 app.listen(app.get('port'));
