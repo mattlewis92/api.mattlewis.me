@@ -21,7 +21,7 @@
     "cors": "~2.7.1",
     "email-existence": "~0.1.5",
     "express": "~4.12.4",
-    "gulp": "~3.8.11",
+    "gulp": "~3.9.0",
     "newrelic": "~1.19.2"
   },
   "engines": {
