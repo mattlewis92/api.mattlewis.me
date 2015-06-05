@@ -13,7 +13,7 @@ module.exports = function(req, res, next) {
 
   T.get('statuses/user_timeline', {
     user_id: TWITTER_USER_ID,
-    count: 200,
+    count: req.query.count || 20,
     exclude_replies: true
   }, function(err, result) {
     if (err) {
