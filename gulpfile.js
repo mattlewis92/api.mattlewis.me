@@ -8,3 +8,5 @@ gulp.task('start', function () {
     env: { 'NODE_ENV': 'development' }
   });
 });
+
+gulp.task('default', ['start']);
