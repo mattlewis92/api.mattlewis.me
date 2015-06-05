@@ -12,7 +12,7 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
-app.use('/me', require('./routes'));
+app.use('/', require('./routes'));
 
 app.use(function(err, req, res, next) {
   res.status(400).json({message: err.message});

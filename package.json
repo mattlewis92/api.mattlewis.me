@@ -23,7 +23,8 @@
     "gulp": "~3.9.0",
     "memory-cache": "~0.1.2",
     "newrelic": "~1.19.2",
-    "request": "~2.57.0"
+    "request": "~2.57.0",
+    "x-ray": "~2.0.0"
   },
   "engines": {
     "node": "~0.12.0"
