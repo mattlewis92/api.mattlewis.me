@@ -1,7 +1,3 @@
-if (process.env.NODE_ENV === 'production') {
-  require('newrelic');
-}
-
 var koa = require('koa');
 var bodyParser = require('koa-bodyparser');
 var cors = require('koa-cors');
