@@ -1,6 +1,7 @@
 var nodemailer = require('nodemailer');
+var bluebird = require('bluebird');
 
-module.exports = function(req, res, next) {
+module.exports = function *() {
 
   var transporter = nodemailer.createTransport({
     host: 'smtp.mandrillapp.com',
@@ -11,17 +12,16 @@ module.exports = function(req, res, next) {
     }
   });
 
-  transporter.sendMail({
-    from: req.body.name + ' <' + process.env.MANDRILL_USER + '>',
+  bluebird.promisifyAll(transporter);
+
+  yield transporter.sendMailAsync({
+    from: this.request.body.name + ' <' + process.env.MANDRILL_USER + '>',
     to: process.env.MANDRILL_USER,
-    subject: 'New message from ' + req.body.name + ' via the website contact form',
-    text: req.body.message,
-    replyTo: req.body.email
-  }, function(err) {
-    if (err) {
-      return next(err);
-    }
-    res.json({success: true});
+    subject: 'New message from ' + this.request.body.name + ' via the website contact form',
+    text: this.request.body.message,
+    replyTo: this.request.body.email
   });
+
+  this.body = {success: true};
 
 };

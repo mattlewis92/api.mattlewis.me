@@ -1,35 +1,41 @@
 if (process.env.NODE_ENV === 'production') {
   require('newrelic');
 }
-var express = require('express');
-var bodyParser = require('body-parser');
-var cors = require('cors');
-var compression = require('compression');
-var helmet = require('helmet');
-var app = express();
 
-app.set('port', (process.env.PORT || 5000));
-app.set('env', process.env.NODE_ENV || 'development');
-app.enable('trust proxy');
-app.disable('x-powered-by');
+var koa = require('koa');
+var bodyParser = require('koa-bodyparser');
+var cors = require('koa-cors');
+var compress = require('koa-compress');
+var helmet = require('koa-helmet');
+var router = require('./routes');
 
-app.use(compression({
-  level: 9
-}));
-app.use(cors());
-app.use(helmet());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(bodyParser.json());
-app.use('/', require('./routes'));
+const PORT = process.env.PORT || 5000;
+var app = koa();
+app.proxy = true;
 
-app.use(function(err, req, res, next) {
-  res.status(400).json({message: err.message});
+app.use(function *(next) {
+  try {
+    yield next;
+  } catch (err) {
+    this.status = err.status || 400;
+    this.body = {message: err.message};
+    this.app.emit('error', err, this);
+  }
 });
 
-app.use(function(req, res) {
-  res.status(404).json({message: 'Route not found'});
+app
+  .use(compress({
+    level: 9
+  }))
+  .use(cors())
+  .use(helmet.defaults())
+  .use(bodyParser())
+  .use(router.routes())
+  .use(router.allowedMethods());
+
+app.use(function *() {
+  this.status = 404;
+  this.body = {message: 'Route not found'};
 });
 
-app.listen(app.get('port'));
+app.listen(PORT);

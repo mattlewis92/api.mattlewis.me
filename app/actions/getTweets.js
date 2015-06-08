@@ -1,8 +1,15 @@
 var Twit = require('twit');
+var bluebird = require('bluebird');
+bluebird.promisifyAll(Twit.prototype);
+var cache = require('memory-cache');
 
-var TWITTER_USER_ID = '2327069694';
+const TWITTER_USER_ID = '2327069694';
 
-module.exports = function(req, res, next) {
+module.exports = function *() {
+
+  if (cache.get(this.request.url)) {
+    return this.body = cache.get(this.request.url);
+  }
 
   var T = new Twit({
     consumer_key:         'vT3VNBIQ3aLLhNB9goadWUsqY',
@@ -11,15 +18,13 @@ module.exports = function(req, res, next) {
     access_token_secret:  process.env.TWITTER_ACCESS_SECRET
   });
 
-  T.get('statuses/user_timeline', {
+  this.body = yield T.getAsync('statuses/user_timeline', {
     user_id: TWITTER_USER_ID,
-    count: req.query.count || 20,
+    count: this.query.count || 20,
     exclude_replies: true
-  }, function(err, result) {
-    if (err) {
-      return next(err);
-    }
-    res.json(result);
+  }).bind(this).spread(function(result) {
+    cache.put(this.request.url, result, 5 * 60 * 1000);
+    return result;
   });
 
 };
