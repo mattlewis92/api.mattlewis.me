@@ -1,7 +1,7 @@
 var Twit = require('twit');
+var cache = require('memory-cache');
 var bluebird = require('bluebird');
 bluebird.promisifyAll(Twit.prototype);
-var cache = require('memory-cache');
 
 const TWITTER_USER_ID = '2327069694';
 

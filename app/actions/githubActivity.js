@@ -1,8 +1,8 @@
 var request = require('request');
 var bluebird = require('bluebird');
+var cache = require('memory-cache');
 bluebird.promisifyAll(request);
 const GITHUB_USERNAME = 'mattlewis92';
-var cache = require('memory-cache');
 
 module.exports = function *() {
 
