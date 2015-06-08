@@ -1,15 +1,9 @@
 const Twit = require('twit');
-const cache = require('memory-cache');
 const bluebird = require('bluebird');
 const TWITTER_USER_ID = '2327069694';
-
 bluebird.promisifyAll(Twit.prototype);
 
-module.exports = function *() {
-
-  if (cache.get(this.request.url)) {
-    return this.body = cache.get(this.request.url);
-  }
+module.exports = function* () {
 
   const T = new Twit({
     consumer_key:         'vT3VNBIQ3aLLhNB9goadWUsqY',
@@ -24,8 +18,6 @@ module.exports = function *() {
     exclude_replies: true
   });
 
-  const tweets = result[0];
-  cache.put(this.request.url, tweets, 5 * 60 * 1000);
-  this.body = tweets;
+  this.body = result[0];
 
 };
