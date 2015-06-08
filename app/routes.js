@@ -7,8 +7,9 @@ var cacheCheck = function* (next) {
   yield next;
 };
 
-router.post('/contact', require('./actions/sendEmail'));
+router.get('/', require('./actions/default'));
 router.get('/social/tweets', cacheCheck, require('./actions/getTweets'));
 router.get('/social/github', cacheCheck, require('./actions/githubActivity'));
+router.post('/contact', require('./actions/sendEmail'));
 
 module.exports = router;
