@@ -12,15 +12,16 @@ module.exports = function *() {
 
   var url = 'https://api.github.com/users/' + GITHUB_USERNAME + '/events/public';
 
-  this.body = yield request
-    .getAsync({url: url, json: true, headers: {'User-Agent': 'mattlewis92'}})
-    .bind(this)
-    .spread(function(response, body) {
-      if (response.statusCode !== 200) {
-        throw new Error(body);
-      }
-      cache.put(this.request.url, body, 5 * 60 * 1000);
-      return body;
-    });
+  var result = yield request.getAsync({url: url, json: true, headers: {'User-Agent': 'mattlewis92'}});
+
+  var response = result[0], body = result[1];
+
+  if (response.statusCode !== 200) {
+    throw new Error(body);
+  }
+
+  cache.put(this.request.url, body, 5 * 60 * 1000);
+
+  this.body = body;
 
 };

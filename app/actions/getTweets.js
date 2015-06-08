@@ -18,13 +18,14 @@ module.exports = function *() {
     access_token_secret:  process.env.TWITTER_ACCESS_SECRET
   });
 
-  this.body = yield T.getAsync('statuses/user_timeline', {
+  var result = yield T.getAsync('statuses/user_timeline', {
     user_id: TWITTER_USER_ID,
     count: this.query.count || 20,
     exclude_replies: true
-  }).bind(this).spread(function(result) {
-    cache.put(this.request.url, result, 5 * 60 * 1000);
-    return result;
   });
+
+  var tweets = result[0];
+  cache.put(this.request.url, tweets, 5 * 60 * 1000);
+  this.body = tweets;
 
 };
