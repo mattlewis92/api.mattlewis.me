@@ -1,12 +1,12 @@
-var koa = require('koa');
-var bodyParser = require('koa-bodyparser');
-var cors = require('koa-cors');
-var compress = require('koa-compress');
-var helmet = require('koa-helmet');
-var router = require('./routes');
+const koa = require('koa');
+const bodyParser = require('koa-bodyparser');
+const cors = require('koa-cors');
+const compress = require('koa-compress');
+const helmet = require('koa-helmet');
+const router = require('./routes');
 
 const PORT = process.env.PORT || 5000;
-var app = koa();
+const app = koa();
 app.proxy = true;
 
 app.use(function *(next) {

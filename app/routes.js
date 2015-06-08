@@ -1,4 +1,4 @@
-var router = require('koa-router')();
+const router = require('koa-router')();
 
 router.post('/contact', require('./actions/sendEmail'));
 router.get('/social/tweets', require('./actions/getTweets'));
