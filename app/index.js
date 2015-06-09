@@ -30,11 +30,16 @@ app
   .use(helmet.defaults())
   .use(bodyParser())
   .use(cash({
-    get: function(key) {
-      return bluebird.resolve(cache.get(key));
+    maxAge: 5 * 60 * 1000,
+    get: function(key, maxAge) {
+      var item = cache.get(key);
+      if (!item || (new Date().getTime() - item.createdAt) > maxAge) {
+        return bluebird.resolve();
+      }
+      return bluebird.resolve(item.data);
     },
     set: function(key, value) {
-      return bluebird.resolve(cache.put(key, value, 5 * 60 * 1000));
+      return bluebird.resolve(cache.put(key, {data: value, createdAt: new Date().getTime()}));
     }
   }))
   .use(router.routes())
