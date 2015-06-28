@@ -18,11 +18,11 @@
   "homepage": "https://github.com/mattlewis92/api.mattlewis.me#readme",
   "dependencies": {
     "bluebird": "~2.9.27",
+    "kcors": "~1.0.1",
     "koa": "~0.21.0",
     "koa-bodyparser": "~2.0.0",
     "koa-cash": "~1.0.1",
     "koa-compress": "~1.0.8",
-    "koa-cors": "0.0.16",
     "koa-helmet": "~0.1.0",
     "koa-router": "~5.1.1",
     "memory-cache": "~0.1.2",
