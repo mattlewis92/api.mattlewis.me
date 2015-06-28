@@ -12,7 +12,7 @@ const app = koa();
 app.proxy = true;
 
 app
-  .use(function* (next) { //error handler middlware
+  .use(function* (next) { //error handler middleware
     try {
       yield next;
     } catch (err) {
