@@ -5,6 +5,7 @@ const compress = require('koa-compress');
 const helmet = require('koa-helmet');
 const cache = require('memory-cache');
 const cash = require('koa-cash');
+const responseTime = require('koa-response-time');
 const router = require('./routes');
 
 const PORT = process.env.PORT || 5000;
@@ -21,6 +22,7 @@ app
       this.app.emit('error', err, this);
     }
   })
+  .use(responseTime())
   .use(compress({
     level: 9
   }))
