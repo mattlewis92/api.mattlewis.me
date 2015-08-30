@@ -6,10 +6,10 @@ bluebird.promisifyAll(Twit.prototype);
 export default async function () {
 
   const T = new Twit({
-    consumer_key:         'vT3VNBIQ3aLLhNB9goadWUsqY',
-    consumer_secret:      process.env.TWITTER_CONSUMER_SECRET,
-    access_token:         '2327069694-vz61gQ8NlEB1OUgYcSVuFJpXuEGaZ2UdMSu4dXf',
-    access_token_secret:  process.env.TWITTER_ACCESS_SECRET
+    consumer_key: 'vT3VNBIQ3aLLhNB9goadWUsqY',
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+    access_token: '2327069694-vz61gQ8NlEB1OUgYcSVuFJpXuEGaZ2UdMSu4dXf',
+    access_token_secret: process.env.TWITTER_ACCESS_SECRET
   });
 
   const result = await T.getAsync('statuses/user_timeline', {

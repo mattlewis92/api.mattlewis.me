@@ -54,4 +54,4 @@ app.listen(PORT);
 
 export default app;
 
-console.log(`App listening on http://127.0.0.1:${PORT}`);
+console.log(`App listening on http://127.0.0.1:${PORT}`); //eslint-disable-line no-console

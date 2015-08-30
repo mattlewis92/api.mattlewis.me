@@ -12,7 +12,7 @@ const cacheCheck = function(expiry) {
       return;
     }
     yield next;
-  }
+  };
 };
 
 router.get('/', defaultAction);
