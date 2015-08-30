@@ -1,7 +1,7 @@
-const nodemailer = require('nodemailer');
-const bluebird = require('bluebird');
+import nodemailer from 'nodemailer';
+import bluebird from 'bluebird';
 
-module.exports = function *() {
+export default function *() {
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.mandrillapp.com',

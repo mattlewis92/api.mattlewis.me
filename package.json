@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.1",
   "description": "My personal API",
-  "main": "app/index.js",
+  "main": "index.js",
   "scripts": {
     "start": "gulp"
   },

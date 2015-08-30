@@ -1,17 +1,23 @@
-const router = require('koa-router')();
+import koaRouter from 'koa-router';
+import defaultAction from './actions/default';
+import tweetsAction from './actions/getTweets';
+import githubAction from './actions/githubActivity';
+import sendEmailAction from './actions/sendEmail';
 
-function cacheCheck(expiry) {
+const router = koaRouter();
+
+var cacheCheck = function(expiry) {
   return function* (next) {
     if (yield* this.cashed(expiry)) {
       return;
     }
     yield next;
   }
-}
+};
 
-router.get('/', require('./actions/default'));
-router.get('/social/tweets', cacheCheck(), require('./actions/getTweets'));
-router.get('/social/github', cacheCheck(), require('./actions/githubActivity'));
-router.post('/contact', require('./actions/sendEmail'));
+router.get('/', defaultAction);
+router.get('/social/tweets', cacheCheck(), tweetsAction);
+router.get('/social/github', cacheCheck(), githubAction);
+router.post('/contact', sendEmailAction);
 
-module.exports = router;
+export default router;

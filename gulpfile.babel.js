@@ -18,7 +18,7 @@ gulp.task('start', () => {
     });
 
     nodemon({
-      script: 'app/index.js',
+      script: 'index.js',
       ext: 'js',
       env: env
     });

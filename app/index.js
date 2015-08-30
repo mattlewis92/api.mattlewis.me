@@ -1,12 +1,12 @@
-const koa = require('koa');
-const bodyParser = require('koa-bodyparser');
-const cors = require('kcors');
-const compress = require('koa-compress');
-const helmet = require('koa-helmet');
-const cache = require('memory-cache');
-const cash = require('koa-cash');
-const responseTime = require('koa-response-time');
-const router = require('./routes');
+import koa from 'koa';
+import bodyParser from 'koa-bodyparser';
+import cors from 'kcors';
+import compress from 'koa-compress';
+import helmet from 'koa-helmet';
+import cache from 'memory-cache';
+import cash from 'koa-cash';
+import responseTime from 'koa-response-time';
+import router from './routes';
 
 const PORT = process.env.PORT || 5000;
 const app = koa();
@@ -31,14 +31,14 @@ app
   .use(bodyParser())
   .use(cash({
     maxAge: 5 * 60 * 1000,
-    get: function(key, maxAge) {
-      var item = cache.get(key);
+    get: (key, maxAge) => {
+      const item = cache.get(key);
       if (!item || (new Date().getTime() - item.createdAt) > maxAge) {
         return Promise.resolve();
       }
       return Promise.resolve(item.data);
     },
-    set: function(key, value) {
+    set: (key, value) => {
       return Promise.resolve(cache.put(key, {data: value, createdAt: new Date().getTime()}));
     }
   }))
@@ -51,4 +51,6 @@ app
 
 app.listen(PORT);
 
-console.log('App listening on http://127.0.0.1:%d', PORT);
+export default app;
+
+console.log(`App listening on http://127.0.0.1:${PORT}`);

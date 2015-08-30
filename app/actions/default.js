@@ -1,5 +1,7 @@
-module.exports = function* () {
+export default function* () {
+
   this.body = {
     hello: 'world!'
   };
+
 };

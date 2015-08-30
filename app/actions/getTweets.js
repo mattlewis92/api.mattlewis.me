@@ -1,9 +1,9 @@
-const Twit = require('twit');
-const bluebird = require('bluebird');
+import Twit from 'twit';
+import bluebird from 'bluebird';
 const TWITTER_USER_ID = '2327069694';
 bluebird.promisifyAll(Twit.prototype);
 
-module.exports = function* () {
+export default function* () {
 
   const T = new Twit({
     consumer_key:         'vT3VNBIQ3aLLhNB9goadWUsqY',
