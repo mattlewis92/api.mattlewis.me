@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import bluebird from 'bluebird';
 
-export default async function() {
+export default function *() {
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.mandrillapp.com',
@@ -14,7 +14,7 @@ export default async function() {
 
   bluebird.promisifyAll(transporter);
 
-  const result = await transporter.sendMailAsync({
+  yield transporter.sendMailAsync({
     from: `${this.request.body.name}<${process.env.MANDRILL_USER}>`,
     to: process.env.MANDRILL_USER,
     subject: `New message from ${this.request.body.name} via the website contact form`,
@@ -22,6 +22,6 @@ export default async function() {
     replyTo: this.request.body.email
   });
 
-  this.body = {success: !!result};
+  this.body = {success: true};
 
 };
