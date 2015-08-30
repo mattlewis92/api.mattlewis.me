@@ -4,10 +4,10 @@ var exec = require('child_process').exec;
 
 gulp.task('start', function() {
 
-  exec('heroku config', function puts(error, stdout, stderr) {
+  exec('heroku config', function puts(error, stdout) {
 
     var env = {
-      'NODE_ENV': 'development'
+      NODE_ENV: 'development'
     };
 
     stdout.trim().split('\n').forEach(function(line, index) {
