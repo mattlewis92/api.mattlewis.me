@@ -14,7 +14,7 @@ export default async function() {
 
   bluebird.promisifyAll(transporter);
 
-  await transporter.sendMailAsync({
+  const result = await transporter.sendMailAsync({
     from: `${this.request.body.name}<${process.env.MANDRILL_USER}>`,
     to: process.env.MANDRILL_USER,
     subject: `New message from ${this.request.body.name} via the website contact form`,
@@ -22,6 +22,6 @@ export default async function() {
     replyTo: this.request.body.email
   });
 
-  this.body = {success: true};
+  this.body = {success: !!result};
 
 };
