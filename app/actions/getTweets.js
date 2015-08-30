@@ -20,4 +20,4 @@ export default async function () {
 
   this.body = result[0];
 
-};
+}

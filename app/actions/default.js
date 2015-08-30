@@ -4,4 +4,4 @@ export default async function () {
     hello: 'world!'
   };
 
-};
+}
