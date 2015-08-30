@@ -5,7 +5,8 @@
   "description": "My personal API",
   "main": "index.js",
   "scripts": {
-    "start": "gulp"
+    "start": "gulp",
+    "deploy": "git push heroku master"
   },
   "repository": {
     "type": "git",
