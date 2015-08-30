@@ -32,7 +32,7 @@
     "twit": "~2.1.0"
   },
   "engines": {
-    "iojs": "2.x.x"
+    "iojs": "3.x.x"
   },
   "devDependencies": {
     "gulp": "~3.9.0",
