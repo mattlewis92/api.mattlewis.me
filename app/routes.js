@@ -6,7 +6,7 @@ import sendEmailAction from './actions/sendEmail';
 
 const router = koaRouter();
 
-var cacheCheck = function(expiry) {
+const cacheCheck = function(expiry) {
   return function* (next) {
     if (yield* this.cashed(expiry)) {
       return;
