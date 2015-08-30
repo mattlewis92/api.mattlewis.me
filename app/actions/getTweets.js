@@ -3,7 +3,7 @@ import bluebird from 'bluebird';
 const TWITTER_USER_ID = '2327069694';
 bluebird.promisifyAll(Twit.prototype);
 
-export default function* () {
+export default async function () {
 
   const T = new Twit({
     consumer_key:         'vT3VNBIQ3aLLhNB9goadWUsqY',
@@ -12,7 +12,7 @@ export default function* () {
     access_token_secret:  process.env.TWITTER_ACCESS_SECRET
   });
 
-  const result = yield T.getAsync('statuses/user_timeline', {
+  const result = await T.getAsync('statuses/user_timeline', {
     user_id: TWITTER_USER_ID,
     count: this.query.count || 20,
     exclude_replies: true

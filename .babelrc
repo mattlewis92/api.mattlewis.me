@@ -1,6 +1,8 @@
 {
     "whitelist": [
         "es6.arrowFunctions",
-        "es6.modules"
+        "es6.modules",
+        "es7.asyncFunctions",
+        "asyncToGenerator"
     ]
 }
