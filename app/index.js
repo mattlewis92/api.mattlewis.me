@@ -27,7 +27,7 @@ app
     level: 9
   }))
   .use(cors())
-  .use(helmet.defaults())
+  .use(helmet())
   .use(bodyParser())
   .use(cash({
     maxAge: 5 * 60 * 1000,
