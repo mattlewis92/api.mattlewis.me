@@ -36,7 +36,7 @@
     "twit": "~2.1.0"
   },
   "engines": {
-    "iojs": "3.x.x"
+    "node": "4.x.x"
   },
   "devDependencies": {
     "babel-eslint": "~4.1.0",
