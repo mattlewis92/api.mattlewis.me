@@ -1,7 +1,6 @@
 {
     "whitelist": [
         "es6.modules",
-        "es7.asyncFunctions",
         "asyncToGenerator"
     ]
 }
