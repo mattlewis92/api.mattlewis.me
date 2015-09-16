@@ -1,4 +1,3 @@
-import koaRouter from 'koa-router';
 import route from 'koa-route';
 import compose from 'composition';
 import defaultAction from './actions/default';
