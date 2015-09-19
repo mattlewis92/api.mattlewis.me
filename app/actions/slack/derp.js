@@ -18,7 +18,7 @@ export default async function() {
   await slack.send({
     channel: `#${this.request.body.channel_name}`,
     username: 'Derp bot',
-    icon_emoji: ":troll:",
+    icon_emoji: ':troll:',
     text: 'Herp a derp',
     attachments: [{
       fallback: 'Herp a derp',
