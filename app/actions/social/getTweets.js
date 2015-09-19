@@ -3,7 +3,7 @@ import bluebird from 'bluebird';
 const TWITTER_USER_ID = '2327069694';
 bluebird.promisifyAll(Twit.prototype);
 
-export default async function () {
+export default async function() {
 
   const T = new Twit({
     consumer_key: 'vT3VNBIQ3aLLhNB9goadWUsqY',

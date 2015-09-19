@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import bluebird from 'bluebird';
 
-export default async function () {
+export default async function() {
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.mandrillapp.com',
