@@ -1,9 +1,9 @@
 import route from 'koa-route';
 import compose from 'composition';
 import defaultAction from './actions/default';
-import tweetsAction from './actions/getTweets';
-import githubAction from './actions/githubActivity';
-import sendEmailAction from './actions/sendEmail';
+import tweetsAction from './actions/social/getTweets';
+import githubAction from './actions/social/githubActivity';
+import sendEmailAction from './actions/contact/sendEmail';
 
 const cacheCheck = function(expiry) {
   return function* (next) {
