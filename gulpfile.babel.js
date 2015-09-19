@@ -13,7 +13,9 @@ gulp.task('start', () => {
     stdout.trim().split('\n').forEach((line, index) => {
       if (index !== 0) {
         const parts = line.split(':');
-        env[parts[0].trim()] = parts[1].trim();
+        const variable = parts.shift().trim();
+        const value = parts.join(':').trim();
+        env[variable] = value;
       }
     });
 
