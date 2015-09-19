@@ -16,7 +16,7 @@ export default async function() {
   var item = images.data[Math.floor(Math.random() * images.data.length)];
 
   await slack.send({
-    channel: `#${this.request.body.channel_name}`,
+    channel: this.request.body.channel_name,
     username: 'Derp bot',
     text: 'Herp a derp',
     attachments: [{
