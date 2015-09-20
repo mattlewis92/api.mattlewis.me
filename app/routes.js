@@ -25,13 +25,24 @@ const limitMiddleware = limit({
   }
 });
 
+const slackAuth = function(token) {
+  return async function(next) {
+    if (this.request.body.token !== token) {
+      this.status = 401;
+      this.body = {message: 'No token provided.'};
+      return;
+    }
+    await next;
+  };
+};
+
 const routes = [
   route.get('/', compose([defaultAction])),
   route.get('/social/tweets', compose([cacheCheck(), tweetsAction])),
   route.get('/social/github', compose([cacheCheck(), githubAction])),
   route.post('/contact', compose([limitMiddleware, sendEmailAction])),
-  route.post('/slack/derp', compose([slackDerpAction])),
-  route.post('/slack/define', compose([slackDefineAction]))
+  route.post('/slack/derp', compose([slackAuth(process.env.SLACK_DERP_COMMAND_TOKEN), slackDerpAction])),
+  route.post('/slack/define', compose([slackAuth(process.env.SLACK_DEFINE_COMMAND_TOKEN), slackDefineAction]))
 ];
 
 export default compose(routes);
