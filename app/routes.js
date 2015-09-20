@@ -19,7 +19,10 @@ const cacheCheck = function(expiry) {
 
 const limitMiddleware = limit({
   duration: 1000 * 60 * 10,
-  max: 1
+  max: 1,
+  accessLimited: {
+    message: `Sorry but you can't send that many emails`
+  }
 });
 
 const routes = [
