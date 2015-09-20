@@ -17,7 +17,7 @@ export default async function() {
     channel: `#${this.request.body.channel_name}`,
     username: 'Urban dictionary',
     icon_url: 'http://i.imgur.com/wrd6aDd.png',
-    text: `*${this.request.body.text}*: ${topResult.definition}`,
+    text: `<${topResult.permalink}|${this.request.body.text}>: ${topResult.definition}`,
     attachments: [{
       fallback: topResult.definition,
       text: `Example: ${topResult.example}`
