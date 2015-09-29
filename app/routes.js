@@ -8,11 +8,11 @@ import slackDerpAction from './actions/slack/derp';
 import slackDefineAction from './actions/slack/define';
 
 const cacheCheck = function(expiry) {
-  return async function (next) {
+  return function* (next) {
     if (yield* this.cashed(expiry)) {
       return;
     }
-    await next;
+    yield next;
   };
 };
 
@@ -34,7 +34,6 @@ const slackAuth = function(token) {
     await next;
   };
 };
-
 
 export default router()
   .get('/', defaultAction)
