@@ -6,7 +6,7 @@ import helmet from 'koa-helmet';
 import cache from 'memory-cache';
 import cash from 'koa-cash';
 import responseTime from 'koa-response-time';
-import router from './routes';
+import routes from './routes';
 
 const PORT = process.env.PORT || 5000;
 const app = koa();
@@ -43,8 +43,7 @@ app
       return Promise.resolve(cache.put(key, {data: value, createdAt: new Date().getTime()}));
     }
   }))
-  .use(router.routes())
-  .use(router.allowedMethods())
+  .use(routes)
   .use(async function() { //default route
     this.status = 404;
     this.body = {message: 'Route not found'};
