@@ -1,5 +1,4 @@
-import route from 'koa-route';
-import compose from 'composition';
+import router from 'koa-router';
 import limit from 'koa-better-ratelimit';
 import defaultAction from './actions/default';
 import tweetsAction from './actions/social/getTweets';
@@ -9,11 +8,11 @@ import slackDerpAction from './actions/slack/derp';
 import slackDefineAction from './actions/slack/define';
 
 const cacheCheck = function(expiry) {
-  return function* (next) {
+  return async function (next) {
     if (yield* this.cashed(expiry)) {
       return;
     }
-    yield next;
+    await next;
   };
 };
 
@@ -36,13 +35,11 @@ const slackAuth = function(token) {
   };
 };
 
-const routes = [
-  route.get('/', compose([defaultAction])),
-  route.get('/social/tweets', compose([cacheCheck(), tweetsAction])),
-  route.get('/social/github', compose([cacheCheck(), githubAction])),
-  route.post('/contact', compose([limitMiddleware, sendEmailAction])),
-  route.post('/slack/derp', compose([slackAuth(process.env.SLACK_DERP_COMMAND_TOKEN), slackDerpAction])),
-  route.post('/slack/define', compose([slackAuth(process.env.SLACK_DEFINE_COMMAND_TOKEN), slackDefineAction]))
-];
 
-export default compose(routes);
+export default router()
+  .get('/', defaultAction)
+  .get('/social/tweets', cacheCheck(), tweetsAction)
+  .get('/social/github', cacheCheck(), githubAction)
+  .post('/contact', limitMiddleware, sendEmailAction)
+  .post('/slack/derp', slackAuth(process.env.SLACK_DERP_COMMAND_TOKEN), slackDerpAction)
+  .post('/slack/define', slackAuth(process.env.SLACK_DEFINE_COMMAND_TOKEN), slackDefineAction);
