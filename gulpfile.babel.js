@@ -2,7 +2,7 @@ import gulp from 'gulp';
 import nodemon from 'gulp-nodemon';
 import {exec} from 'child_process';
 
-gulp.task('start', () => {
+gulp.task('start', (done) => {
 
   exec('heroku config', (error, stdout) => {
 
@@ -23,7 +23,7 @@ gulp.task('start', () => {
       script: 'index.js',
       ext: 'js',
       env: env
-    });
+    }).on('end', done);
 
   });
 
