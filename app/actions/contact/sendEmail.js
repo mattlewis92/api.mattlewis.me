@@ -4,19 +4,19 @@ import bluebird from 'bluebird';
 export default async function() {
 
   const transporter = nodemailer.createTransport({
-    host: 'smtp.mandrillapp.com',
+    host: 'smtp.mailgun.org',
     port: 587,
     auth: {
-      user: process.env.MANDRILL_USER,
-      pass: process.env.MANDRILL_PASSWORD
+      user: process.env.MAILGUN_USERNAME,
+      pass: process.env.MAILGUN_PASSWORD
     }
   });
 
   bluebird.promisifyAll(transporter);
 
   await transporter.sendMailAsync({
-    from: `${this.request.body.name}<${process.env.MANDRILL_USER}>`,
-    to: process.env.MANDRILL_USER,
+    from: `${this.request.body.name}<${process.env.EMAIL_SEND_TO}>`,
+    to: process.env.EMAIL_SEND_TO,
     subject: `New message from ${this.request.body.name} via the website contact form`,
     text: this.request.body.message,
     replyTo: this.request.body.email
