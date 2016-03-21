@@ -38,7 +38,7 @@
     "memory-cache": "~0.1.2",
     "node-fetch": "~1.4.0",
     "node-slack": "0.0.7",
-    "nodemailer": "~1.8.0",
+    "nodemailer": "~2.3.0",
     "twit": "~2.2.3"
   },
   "engines": {

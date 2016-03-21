@@ -15,7 +15,7 @@ export default function* () {
   bluebird.promisifyAll(transporter);
 
   yield transporter.sendMailAsync({
-    from: `${this.request.body.name}<${process.env.EMAIL_SEND_TO}>`,
+    from: `"${this.request.body.name}" <${process.env.EMAIL_SEND_TO}>`,
     to: process.env.EMAIL_SEND_TO,
     subject: `New message from ${this.request.body.name} via the website contact form`,
     text: this.request.body.message,
