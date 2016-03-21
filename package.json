@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp",
-    "predeploy": "npm run lint",
+    "test": "npm run lint",
+    "predeploy": "npm test",
     "deploy": "git push heroku master",
     "lint": "eslint ."
   },
@@ -42,9 +43,8 @@
     "node": "4.x.x"
   },
   "devDependencies": {
-    "babel-eslint": "~4.1.0",
-    "eslint": "~1.10.3",
-    "eslint-config-mwl": "~0.3.0",
+    "eslint": "~2.4.0",
+    "eslint-config-mwl": "~0.4.0",
     "gulp": "~3.9.0",
     "gulp-nodemon": "~2.0.3"
   }
