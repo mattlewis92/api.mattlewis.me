@@ -12,12 +12,10 @@ export default function* () {
     access_token_secret: process.env.TWITTER_ACCESS_SECRET
   });
 
-  const result = yield T.getAsync('statuses/user_timeline', {
+  this.body = yield T.getAsync('statuses/user_timeline', {
     user_id: TWITTER_USER_ID,
     count: this.query.count || 20,
     exclude_replies: true
   });
-
-  this.body = result[0];
 
 }
