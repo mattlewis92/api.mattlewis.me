@@ -42,7 +42,7 @@
     "twit": "~2.2.3"
   },
   "engines": {
-    "node": "4.x.x"
+    "node": "5.x.x"
   },
   "devDependencies": {
     "eslint": "~2.4.0",
