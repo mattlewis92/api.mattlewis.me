@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/mattlewis92/api.mattlewis.me#readme",
   "dependencies": {
-    "babel-core": "~5.8.25",
+    "babel-core": "~6.7.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "~6.7.0",
+    "babel-register": "~6.7.2",
     "bluebird": "~2.10.0",
     "kcors": "~1.1.0",
     "koa": "~1.2.0",
