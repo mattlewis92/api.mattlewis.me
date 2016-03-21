@@ -10,7 +10,7 @@ import slackDefineAction from './actions/slack/define';
 
 const cacheCheck = function(expiry) {
   return function* (next) {
-    if (yield* this.cashed(expiry)) {
+    if (yield this.cashed(expiry)) {
       return;
     }
     yield next;
