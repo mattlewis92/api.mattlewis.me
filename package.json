@@ -24,7 +24,7 @@
     "babel-core": "~6.7.2",
     "babel-plugin-transform-es2015-modules-commonjs": "~6.7.0",
     "babel-register": "~6.7.2",
-    "bluebird": "~2.10.0",
+    "bluebird": "~3.3.4",
     "kcors": "~1.1.0",
     "koa": "~1.2.0",
     "koa-better-ratelimit": "~2.1.2",
