@@ -3,19 +3,19 @@ import fetch from 'node-fetch';
 const slack = new Slack(process.env.SLACK_WEBHOOK);
 const IMGUR_CLIENT_ID = 'de44c1f57f60e41';
 
-export default async function() {
+export default function* () {
 
-  const result = await fetch('https://api.imgur.com/3/gallery/r/derp/0', {
+  const result = yield fetch('https://api.imgur.com/3/gallery/r/derp/0', {
     headers: {
       Authorization: 'Client-ID ' + IMGUR_CLIENT_ID
     }
   });
 
-  const images = await result.json();
+  const images = yield result.json();
 
-  var item = images.data[Math.floor(Math.random() * images.data.length)];
+  const item = images.data[Math.floor(Math.random() * images.data.length)];
 
-  await slack.send({
+  yield slack.send({
     channel: `#${this.request.body.channel_name}`,
     username: 'Derp bot',
     icon_emoji: ':troll:',

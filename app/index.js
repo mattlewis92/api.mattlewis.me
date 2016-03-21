@@ -11,12 +11,11 @@ import routes from './routes';
 const PORT = process.env.PORT || 5000;
 const app = koa();
 app.proxy = true;
-app.experimental = true;
 
 app
-  .use(async function(next) { //error handler middleware
+  .use(function* (next) { //error handler middleware
     try {
-      await next;
+      yield next;
     } catch (err) {
       this.status = err.status || 400;
       this.body = {message: err.message};
@@ -44,7 +43,7 @@ app
     }
   }))
   .use(routes)
-  .use(async function() { //default route
+  .use(function* () { //default route
     this.status = 404;
     this.body = {message: 'Route not found'};
   });

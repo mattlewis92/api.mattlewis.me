@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import bluebird from 'bluebird';
 
-export default async function() {
+export default function* () {
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.mailgun.org',
@@ -14,7 +14,7 @@ export default async function() {
 
   bluebird.promisifyAll(transporter);
 
-  await transporter.sendMailAsync({
+  yield transporter.sendMailAsync({
     from: `${this.request.body.name}<${process.env.EMAIL_SEND_TO}>`,
     to: process.env.EMAIL_SEND_TO,
     subject: `New message from ${this.request.body.name} via the website contact form`,

@@ -1,5 +1,5 @@
 import route from 'koa-route';
-import compose from 'composition';
+import compose from 'koa-compose';
 import limit from 'koa-better-ratelimit';
 import defaultAction from './actions/default';
 import tweetsAction from './actions/social/getTweets';
@@ -26,13 +26,13 @@ const limitMiddleware = limit({
 });
 
 const slackAuth = function(token) {
-  return async function(next) {
+  return function* (next) {
     if (this.request.body.token !== token) {
       this.status = 401;
       this.body = {message: 'No token provided.'};
       return;
     }
-    await next;
+    yield next;
   };
 };
 

@@ -1,4 +1,4 @@
-export default async function () {
+export default function* () {
 
   this.body = {
     hello: 'world!'
