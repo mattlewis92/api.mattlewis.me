@@ -7,7 +7,7 @@ export default function* () {
 
   yield slack.send({
     channel: `#${this.request.body.channel_name}`,
-    username: 'Zendesk ticket number',
+    username: 'Zendesk ticket link',
     icon_emoji: ':information_desk_person:',
     text: `https://socialsignin.zendesk.com/agent/tickets/${ticketId}`
   });
