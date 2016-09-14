@@ -44,7 +44,7 @@ const routes = [
   route.post('/contact', compose([limitMiddleware, sendEmailAction])),
   route.post('/slack/derp', compose([slackAuth(process.env.SLACK_DERP_COMMAND_TOKEN), slackDerpAction])),
   route.post('/slack/define', compose([slackAuth(process.env.SLACK_DEFINE_COMMAND_TOKEN), slackDefineAction])),
-  route.post('/slack/zendesk-ticket-number', compose([slackAuth(process.env.SLACK_DEFINE_COMMAND_TOKEN), zendeskTicketNumberAction]))
+  route.post('/slack/zendesk-ticket-number', compose([slackAuth(process.env.SLACK_ZENDESK_TICKET_NUMBER_COMMAND_TOKEN), zendeskTicketNumberAction]))
 ];
 
 export default compose(routes);
