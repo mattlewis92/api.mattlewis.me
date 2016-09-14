@@ -7,6 +7,7 @@ import githubAction from './actions/social/githubActivity';
 import sendEmailAction from './actions/contact/sendEmail';
 import slackDerpAction from './actions/slack/derp';
 import slackDefineAction from './actions/slack/define';
+import zendeskTicketNumberAction from './actions/slack/zendeskTicketNumber';
 
 const cacheCheck = function(expiry) {
   return function* (next) {
@@ -42,7 +43,8 @@ const routes = [
   route.get('/social/github', compose([cacheCheck(), githubAction])),
   route.post('/contact', compose([limitMiddleware, sendEmailAction])),
   route.post('/slack/derp', compose([slackAuth(process.env.SLACK_DERP_COMMAND_TOKEN), slackDerpAction])),
-  route.post('/slack/define', compose([slackAuth(process.env.SLACK_DEFINE_COMMAND_TOKEN), slackDefineAction]))
+  route.post('/slack/define', compose([slackAuth(process.env.SLACK_DEFINE_COMMAND_TOKEN), slackDefineAction])),
+  route.post('/slack/zendesk-ticket-number', compose([slackAuth(process.env.SLACK_DEFINE_COMMAND_TOKEN), zendeskTicketNumberAction]))
 ];
 
 export default compose(routes);
