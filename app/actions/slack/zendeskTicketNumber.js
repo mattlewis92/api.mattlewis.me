@@ -12,7 +12,7 @@ export default function* () {
   };
 
   if (!ticketId.match(/^\d+$/)) {
-    message.icon_emoji = ':middle_finger';
+    message.icon_emoji = ':middle_finger:';
     message.text = 'Ticket ids can only be numeric numbers';
   }
 
