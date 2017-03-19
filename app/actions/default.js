@@ -1,6 +1,6 @@
-module.exports = function* () {
+module.exports = async ctx => {
 
-  this.body = {
+  ctx.body = {
     hello: 'world!'
   };
 

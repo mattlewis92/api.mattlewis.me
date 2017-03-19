@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 const bluebird = require('bluebird');
 
-module.exports = function* () {
+module.exports = async ctx => {
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.mailgun.org',
@@ -14,14 +14,14 @@ module.exports = function* () {
 
   bluebird.promisifyAll(transporter);
 
-  yield transporter.sendMailAsync({
-    from: `"${this.request.body.name}" <${process.env.EMAIL_SEND_TO}>`,
+  await transporter.sendMailAsync({
+    from: `"${ctx.request.body.name}" <${process.env.EMAIL_SEND_TO}>`,
     to: process.env.EMAIL_SEND_TO,
-    subject: `New message from ${this.request.body.name} via the website contact form`,
-    text: this.request.body.message,
-    replyTo: this.request.body.email
+    subject: `New message from ${ctx.request.body.name} via the website contact form`,
+    text: ctx.request.body.message,
+    replyTo: ctx.request.body.email
   });
 
-  this.body = {success: true};
+  ctx.body = {success: true};
 
 };

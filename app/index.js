@@ -1,4 +1,4 @@
-const koa = require('koa');
+const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const cors = require('kcors');
 const compress = require('koa-compress');
@@ -9,17 +9,17 @@ const responseTime = require('koa-response-time');
 const routes = require('./routes');
 
 const PORT = process.env.PORT || 5000;
-const app = koa();
+const app = new Koa();
 app.proxy = true;
 
 app
-  .use(function* (next) { //error handler middleware
+  .use(async (ctx, next) => { // error handler middleware
     try {
-      yield next;
+      await next();
     } catch (err) {
-      this.status = err.status || 400;
-      this.body = {message: err.message};
-      this.app.emit('error', err, this);
+      ctx.status = err.status || 400;
+      ctx.body = {message: err.message};
+      ctx.app.emit('error', err, ctx);
     }
   })
   .use(responseTime())
@@ -39,17 +39,15 @@ app
       return Promise.resolve(item.data);
     },
     set: (key, value) => {
-      return Promise.resolve(cache.put(key, {data: value, createdAt: new Date().getTime()}));
+      return Promise.resolve(cache.put(key, {data: value, createdAt: Date.now()}));
     }
   }))
   .use(routes)
-  .use(function* () { //default route
-    this.status = 404;
-    this.body = {message: 'Route not found'};
+  .use(async ctx => { //default route
+    ctx.status = 404;
+    ctx.body = {message: 'Route not found'};
   });
 
-app.listen(PORT);
+app.listen(PORT, () => console.log(`App listening on http://127.0.0.1:${PORT}`)); //eslint-disable-line no-console
 
 module.exports = app;
-
-console.log(`App listening on http://127.0.0.1:${PORT}`); //eslint-disable-line no-console

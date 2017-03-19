@@ -1,6 +1,6 @@
 const route = require('koa-route');
 const compose = require('koa-compose');
-const limit = require('koa-better-ratelimit');
+const rateLimit = require('koa-ratelimit-lru');
 const defaultAction = require('./actions/default');
 const tweetsAction = require('./actions/social/getTweets');
 const githubAction = require('./actions/social/githubActivity');
@@ -9,31 +9,33 @@ const slackDerpAction = require('./actions/slack/derp');
 const slackDefineAction = require('./actions/slack/define');
 const zendeskTicketNumberAction = require('./actions/slack/zendeskTicketNumber');
 
-const cacheCheck = function(expiry) {
-  return function* (next) {
-    if (yield this.cashed(expiry)) {
-      return;
+const cacheCheck = expiry => {
+  return async (ctx, next) => {
+    if (!await ctx.cashed(expiry)) {
+      await next();
     }
-    yield next;
   };
 };
 
-const limitMiddleware = limit({
-  duration: 1000 * 60 * 10,
-  max: 1,
-  accessLimited: {
-    message: 'Sorry but you can\'t send that many emails'
+const limitMiddleware = compose([async (ctx, next) => {
+  await next();
+  if (ctx.body.msg) {
+    ctx.body = {message: ctx.body.msg}; // the frontend expects `message` instead of `msg`
   }
-});
+}, rateLimit({
+  duration: 1000 * 60 * 10,
+  errorMessage: 'Sorry but you can\'t send that many emails',
+  rate: 1
+})]);
 
-const slackAuth = function(token) {
-  return function* (next) {
-    if (this.request.body.token !== token) {
-      this.status = 401;
-      this.body = {message: 'No token provided.'};
-      return;
+const slackAuth = token => {
+  return async (ctx, next) => {
+    if (ctx.request.body.token !== token) {
+      ctx.status = 401;
+      ctx.body = {message: 'No token provided.'};
+    } else {
+      await next();
     }
-    yield next;
   };
 };
 
