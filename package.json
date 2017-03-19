@@ -21,33 +21,33 @@
   },
   "homepage": "https://github.com/mattlewis92/api.mattlewis.me#readme",
   "dependencies": {
-    "babel-core": "~6.14.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "~6.14.0",
-    "babel-register": "~6.14.0",
-    "bluebird": "~3.4.6",
-    "kcors": "~1.2.1",
-    "koa": "~1.2.0",
-    "koa-better-ratelimit": "~2.1.2",
-    "koa-bodyparser": "~2.2.0",
-    "koa-cash": "~2.0.0",
-    "koa-compose": "~2.4.0",
-    "koa-compress": "~1.0.8",
-    "koa-helmet": "~1.0.0",
-    "koa-response-time": "~1.0.2",
-    "koa-route": "~2.4.2",
-    "memory-cache": "~0.1.2",
-    "node-fetch": "~1.6.1",
+    "babel-core": "^6.14.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.14.0",
+    "babel-register": "^6.14.0",
+    "bluebird": "^3.4.6",
+    "kcors": "^1.2.1",
+    "koa": "^1.2.0",
+    "koa-better-ratelimit": "^2.1.2",
+    "koa-bodyparser": "^2.2.0",
+    "koa-cash": "^2.0.0",
+    "koa-compose": "^2.4.0",
+    "koa-compress": "^1.0.8",
+    "koa-helmet": "^1.0.0",
+    "koa-response-time": "^1.0.2",
+    "koa-route": "^2.4.2",
+    "memory-cache": "^0.1.2",
+    "node-fetch": "^1.6.1",
     "node-slack": "0.0.7",
-    "nodemailer": "~2.6.0",
-    "twit": "~2.2.3"
+    "nodemailer": "^2.6.0",
+    "twit": "^2.2.3"
   },
   "engines": {
-    "node": "5.x.x"
+    "node": "7.x.x"
   },
   "devDependencies": {
-    "eslint": "~3.5.0",
-    "eslint-config-mwl": "~0.5.0",
-    "gulp": "~3.9.0",
-    "gulp-nodemon": "~2.1.0"
+    "eslint": "^3.5.0",
+    "eslint-config-mwl": "^0.5.0",
+    "gulp": "^3.9.0",
+    "gulp-nodemon": "^2.1.0"
   }
 }
