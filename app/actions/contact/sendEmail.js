@@ -24,4 +24,4 @@ module.exports = function* () {
 
   this.body = {success: true};
 
-}
+};

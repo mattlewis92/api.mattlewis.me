@@ -19,4 +19,4 @@ module.exports = function* () {
     exclude_replies: true
   });
 
-}
+};
