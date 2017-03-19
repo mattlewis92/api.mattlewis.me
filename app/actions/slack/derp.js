@@ -1,9 +1,10 @@
-import Slack from 'node-slack';
-import fetch from 'node-fetch';
+const fetch = require('node-fetch');
+const Slack = require('node-slack');
+
 const slack = new Slack(process.env.SLACK_WEBHOOK);
 const IMGUR_CLIENT_ID = 'de44c1f57f60e41';
 
-export default function* () {
+module.exports = function* () {
 
   const result = yield fetch('https://api.imgur.com/3/gallery/r/derp/0', {
     headers: {

@@ -1,7 +1,7 @@
-import nodemailer from 'nodemailer';
-import bluebird from 'bluebird';
+const nodemailer = require('nodemailer');
+const bluebird = require('bluebird');
 
-export default function* () {
+module.exports = function* () {
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.mailgun.org',

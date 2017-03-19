@@ -1,13 +1,13 @@
-import route from 'koa-route';
-import compose from 'koa-compose';
-import limit from 'koa-better-ratelimit';
-import defaultAction from './actions/default';
-import tweetsAction from './actions/social/getTweets';
-import githubAction from './actions/social/githubActivity';
-import sendEmailAction from './actions/contact/sendEmail';
-import slackDerpAction from './actions/slack/derp';
-import slackDefineAction from './actions/slack/define';
-import zendeskTicketNumberAction from './actions/slack/zendeskTicketNumber';
+const route = require('koa-route');
+const compose = require('koa-compose');
+const limit = require('koa-better-ratelimit');
+const defaultAction = require('./actions/default');
+const tweetsAction = require('./actions/social/getTweets');
+const githubAction = require('./actions/social/githubActivity');
+const sendEmailAction = require('./actions/contact/sendEmail');
+const slackDerpAction = require('./actions/slack/derp');
+const slackDefineAction = require('./actions/slack/define');
+const zendeskTicketNumberAction = require('./actions/slack/zendeskTicketNumber');
 
 const cacheCheck = function(expiry) {
   return function* (next) {
@@ -47,4 +47,4 @@ const routes = [
   route.post('/slack/zendesk-ticket-number', compose([slackAuth(process.env.SLACK_ZENDESK_TICKET_NUMBER_COMMAND_TOKEN), zendeskTicketNumberAction]))
 ];
 
-export default compose(routes);
+module.exports = compose(routes);

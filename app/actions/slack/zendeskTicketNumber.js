@@ -1,7 +1,8 @@
-import Slack from 'node-slack';
+const Slack = require('node-slack');
+
 const slack = new Slack(process.env.SLACK_WEBHOOK);
 
-export default function* () {
+module.exports = function* () {
 
   const ticketId = this.request.body.text.replace('#', '').trim();
   const message = {

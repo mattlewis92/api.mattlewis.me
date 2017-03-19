@@ -1,8 +1,9 @@
-import fetch from 'node-fetch';
-import Slack from 'node-slack';
+const fetch = require('node-fetch');
+const Slack = require('node-slack');
+
 const slack = new Slack(process.env.SLACK_WEBHOOK);
 
-export default function* () {
+module.exports = function* () {
 
   const result = yield fetch(`http://api.urbandictionary.com/v0/define?term=${this.request.body.text}`);
   const resultBody = yield result.json();

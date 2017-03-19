@@ -1,6 +1,6 @@
-import gulp from 'gulp';
-import nodemon from 'gulp-nodemon';
-import {exec} from 'child_process';
+const gulp = require('gulp');
+const nodemon = require('gulp-nodemon');
+const {exec} = require('child_process');
 
 gulp.task('start', (done) => {
 
