@@ -3,7 +3,7 @@ const compose = require('koa-compose');
 const rateLimit = require('koa-ratelimit-lru');
 const defaultAction = require('./actions/default');
 const tweetsAction = require('./actions/social/getTweets');
-const githubAction = require('./actions/social/githubActivity');
+const githubReposAction = require('./actions/social/githubRepos');
 const sendEmailAction = require('./actions/contact/sendEmail');
 const slackDerpAction = require('./actions/slack/derp');
 const slackDefineAction = require('./actions/slack/define');
@@ -41,7 +41,7 @@ const slackAuth = token => {
 const routes = [
   route.get('/', compose([defaultAction])),
   route.get('/social/tweets', compose([cacheCheck(), tweetsAction])),
-  route.get('/social/github', compose([cacheCheck(), githubAction])),
+  route.get('/social/github/repos', compose([cacheCheck(), githubReposAction])),
   route.post('/contact', compose([limitMiddleware, sendEmailAction])),
   route.post('/slack/derp', compose([slackAuth(process.env.SLACK_DERP_COMMAND_TOKEN), slackDerpAction])),
   route.post('/slack/define', compose([slackAuth(process.env.SLACK_DEFINE_COMMAND_TOKEN), slackDefineAction]))
