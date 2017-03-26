@@ -7,7 +7,6 @@ const githubAction = require('./actions/social/githubActivity');
 const sendEmailAction = require('./actions/contact/sendEmail');
 const slackDerpAction = require('./actions/slack/derp');
 const slackDefineAction = require('./actions/slack/define');
-const zendeskTicketNumberAction = require('./actions/slack/zendeskTicketNumber');
 
 const cacheCheck = expiry => {
   return async (ctx, next) => {
@@ -45,8 +44,7 @@ const routes = [
   route.get('/social/github', compose([cacheCheck(), githubAction])),
   route.post('/contact', compose([limitMiddleware, sendEmailAction])),
   route.post('/slack/derp', compose([slackAuth(process.env.SLACK_DERP_COMMAND_TOKEN), slackDerpAction])),
-  route.post('/slack/define', compose([slackAuth(process.env.SLACK_DEFINE_COMMAND_TOKEN), slackDefineAction])),
-  route.post('/slack/zendesk-ticket-number', compose([slackAuth(process.env.SLACK_ZENDESK_TICKET_NUMBER_COMMAND_TOKEN), zendeskTicketNumberAction]))
+  route.post('/slack/define', compose([slackAuth(process.env.SLACK_DEFINE_COMMAND_TOKEN), slackDefineAction]))
 ];
 
 module.exports = compose(routes);
