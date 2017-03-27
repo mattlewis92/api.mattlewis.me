@@ -16,7 +16,8 @@ module.exports = async ctx => {
   ctx.body = await T.getAsync('statuses/user_timeline', {
     user_id: TWITTER_USER_ID,
     count: ctx.query.count || 20,
-    exclude_replies: true
+    exclude_replies: true,
+    tweet_mode: 'extended'
   });
 
 };
