@@ -14,7 +14,7 @@ module.exports = async ctx => {
 
   bluebird.promisifyAll(transporter);
 
-  const to = ctx.request.body.contract ? process.env.EMAIL_CONTRACT_SEND_TO : process.env.EMAIL_SEND_TO;
+  const to = ctx.request.body.contracting ? process.env.EMAIL_CONTRACTING_SEND_TO : process.env.EMAIL_SEND_TO;
 
   await transporter.sendMailAsync({
     from: `"${ctx.request.body.name}" <${process.env.EMAIL_SEND_TO}>`,
