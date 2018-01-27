@@ -24,7 +24,7 @@ const limitMiddleware = compose([async (ctx, next) => {
 }, rateLimit({
   duration: 1000 * 60 * 10,
   errorMessage: 'Sorry but you can\'t send that many emails',
-  rate: 1
+  rate: 5
 })]);
 
 const slackAuth = token => {
