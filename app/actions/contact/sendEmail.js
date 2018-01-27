@@ -14,9 +14,11 @@ module.exports = async ctx => {
 
   bluebird.promisifyAll(transporter);
 
+  const to = ctx.request.body.contract ? process.env.EMAIL_CONTRACT_SEND_TO : process.env.EMAIL_SEND_TO;
+
   await transporter.sendMailAsync({
     from: `"${ctx.request.body.name}" <${process.env.EMAIL_SEND_TO}>`,
-    to: process.env.EMAIL_SEND_TO,
+    to,
     subject: `New message from ${ctx.request.body.name} via the website contact form`,
     text: ctx.request.body.message,
     replyTo: ctx.request.body.email
