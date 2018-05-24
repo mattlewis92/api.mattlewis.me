@@ -3,12 +3,12 @@
   "private": true,
   "version": "0.0.1",
   "description": "My personal API",
+  "main": "index.js",
   "scripts": {
     "start": "node dev.js",
-    "now-start": "node app/index.js",
     "test": "npm run lint",
     "predeploy": "npm test",
-    "deploy": "now",
+    "deploy": "git push heroku master",
     "lint": "xo",
     "precommit": "pretty-quick --staged"
   },
