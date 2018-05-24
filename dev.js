@@ -1,4 +1,4 @@
-const nodemon = require('gulp-nodemon');
+const nodemon = require('nodemon');
 const {exec} = require('child_process');
 
 exec('heroku config', (error, stdout) => {
