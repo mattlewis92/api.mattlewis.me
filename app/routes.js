@@ -5,8 +5,6 @@ const defaultAction = require('./actions/default');
 const tweetsAction = require('./actions/social/getTweets');
 const githubReposAction = require('./actions/social/githubRepos');
 const sendEmailAction = require('./actions/contact/sendEmail');
-const slackDerpAction = require('./actions/slack/derp');
-const slackDefineAction = require('./actions/slack/define');
 
 const cacheCheck = expiry => {
   return async (ctx, next) => {
@@ -27,24 +25,11 @@ const limitMiddleware = compose([async (ctx, next) => {
   rate: 5
 })]);
 
-const slackAuth = token => {
-  return async (ctx, next) => {
-    if (ctx.request.body.token !== token) {
-      ctx.status = 401;
-      ctx.body = {message: 'No token provided.'};
-    } else {
-      await next();
-    }
-  };
-};
-
 const routes = [
   route.get('/', compose([defaultAction])),
   route.get('/social/tweets', compose([cacheCheck(), tweetsAction])),
   route.get('/social/github/repos', compose([cacheCheck(), githubReposAction])),
-  route.post('/contact', compose([limitMiddleware, sendEmailAction])),
-  route.post('/slack/derp', compose([slackAuth(process.env.SLACK_DERP_COMMAND_TOKEN), slackDerpAction])),
-  route.post('/slack/define', compose([slackAuth(process.env.SLACK_DEFINE_COMMAND_TOKEN), slackDefineAction]))
+  route.post('/contact', compose([limitMiddleware, sendEmailAction]))
 ];
 
 module.exports = compose(routes);
