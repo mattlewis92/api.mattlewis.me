@@ -25,7 +25,7 @@
     "kcors": "^2.2.1",
     "koa": "^2.2.0",
     "koa-bodyparser": "^4.1.0",
-    "koa-cash": "^3.0.0",
+    "koa-cash": "^3.1.0-0",
     "koa-compose": "^3.2.1",
     "koa-compress": "^2.0.0",
     "koa-helmet": "^3.1.0",
@@ -39,8 +39,8 @@
     "twit": "^2.2.3"
   },
   "engines": {
-    "node": "8.x.x",
-    "yarn": "0.21.x"
+    "node": "10.x.x",
+    "npm": "6.x.x"
   },
   "devDependencies": {
     "eslint": "^3.5.0",
