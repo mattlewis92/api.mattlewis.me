@@ -13,7 +13,8 @@ const app = new Koa();
 app.proxy = true;
 
 app
-  .use(async(ctx, next) => { // error handler middleware
+  .use(async (ctx, next) => {
+    // Error handler middleware
     try {
       await next();
     } catch (err) {
@@ -23,31 +24,40 @@ app
     }
   })
   .use(responseTime())
-  .use(compress({
-    level: 9
-  }))
+  .use(
+    compress({
+      level: 9
+    })
+  )
   .use(cors())
   .use(helmet())
   .use(bodyParser())
-  .use(cash({
-    maxAge: 5 * 60 * 1000,
-    get: (key, maxAge) => {
-      const item = cache.get(key);
-      if (!item || (new Date().getTime() - item.createdAt) > maxAge) {
-        return Promise.resolve();
+  .use(
+    cash({
+      maxAge: 5 * 60 * 1000,
+      get: (key, maxAge) => {
+        const item = cache.get(key);
+        if (!item || new Date().getTime() - item.createdAt > maxAge) {
+          return Promise.resolve();
+        }
+        return Promise.resolve(item.data);
+      },
+      set: (key, value) => {
+        return Promise.resolve(
+          cache.put(key, {data: value, createdAt: Date.now()})
+        );
       }
-      return Promise.resolve(item.data);
-    },
-    set: (key, value) => {
-      return Promise.resolve(cache.put(key, {data: value, createdAt: Date.now()}));
-    }
-  }))
+    })
+  )
   .use(routes)
-  .use(async ctx => { //default route
+  .use(async ctx => {
+    // Default route
     ctx.status = 404;
     ctx.body = {message: 'Route not found'};
   });
 
-app.listen(PORT, () => console.log(`App listening on http://127.0.0.1:${PORT}`)); //eslint-disable-line no-console
+app.listen(PORT, () =>
+  console.log(`App listening on http://127.0.0.1:${PORT}`)
+);
 
 module.exports = app;

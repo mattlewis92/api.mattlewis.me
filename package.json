@@ -9,7 +9,8 @@
     "test": "npm run lint",
     "predeploy": "npm test",
     "deploy": "git push heroku master",
-    "lint": "eslint ."
+    "lint": "xo",
+    "precommit": "pretty-quick --staged"
   },
   "repository": {
     "type": "git",
@@ -42,8 +43,14 @@
     "npm": "6.x.x"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-mwl": "^0.5.0",
-    "nodemon": "^1.17.5"
+    "husky": "^0.14.3",
+    "nodemon": "^1.17.5",
+    "prettier": "^1.12.1",
+    "pretty-quick": "^1.6.0",
+    "xo": "^0.21.1"
+  },
+  "xo": {
+    "space": true,
+    "prettier": true
   }
 }

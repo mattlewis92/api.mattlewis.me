@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const Twit = require('twit');
 const bluebird = require('bluebird');
 
@@ -5,7 +6,6 @@ const TWITTER_USER_ID = '2327069694';
 bluebird.promisifyAll(Twit.prototype);
 
 module.exports = async ctx => {
-
   const T = new Twit({
     consumer_key: 'vT3VNBIQ3aLLhNB9goadWUsqY',
     consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
@@ -19,5 +19,4 @@ module.exports = async ctx => {
     exclude_replies: true,
     tweet_mode: 'extended'
   });
-
 };
