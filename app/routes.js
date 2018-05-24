@@ -7,14 +7,14 @@ const githubReposAction = require('./actions/social/githubRepos');
 const sendEmailAction = require('./actions/contact/sendEmail');
 
 const cacheCheck = expiry => {
-  return async (ctx, next) => {
+  return async(ctx, next) => {
     if (!await ctx.cashed(expiry)) {
       await next();
     }
   };
 };
 
-const limitMiddleware = compose([async (ctx, next) => {
+const limitMiddleware = compose([async(ctx, next) => {
   await next();
   if (ctx.body.msg) {
     ctx.body = {message: ctx.body.msg}; // the frontend expects `message` instead of `msg`

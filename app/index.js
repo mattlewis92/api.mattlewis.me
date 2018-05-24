@@ -13,7 +13,7 @@ const app = new Koa();
 app.proxy = true;
 
 app
-  .use(async (ctx, next) => { // error handler middleware
+  .use(async(ctx, next) => { // error handler middleware
     try {
       await next();
     } catch (err) {
