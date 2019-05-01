@@ -9,8 +9,7 @@
     "test": "npm run lint",
     "predeploy": "npm test",
     "deploy": "git push heroku master",
-    "lint": "xo",
-    "precommit": "pretty-quick --staged"
+    "lint": "xo"
   },
   "repository": {
     "type": "git",
@@ -22,35 +21,40 @@
   },
   "homepage": "https://github.com/mattlewis92/api.mattlewis.me#readme",
   "dependencies": {
-    "bluebird": "^3.4.6",
-    "kcors": "^2.2.1",
-    "koa": "^2.2.0",
+    "bluebird": "^3.5.4",
+    "kcors": "^2.2.2",
+    "koa": "^2.7.0",
     "koa-bodyparser": "^4.1.0",
     "koa-cash": "^3.1.0-0",
     "koa-compose": "^4.1.0",
     "koa-compress": "^3.0.0",
-    "koa-helmet": "^4.0.0",
+    "koa-helmet": "^4.1.0",
     "koa-ratelimit-lru": "^1.0.2",
-    "koa-response-time": "^2.0.0",
+    "koa-response-time": "^2.1.0",
     "koa-route": "^3.2.0",
     "memory-cache": "^0.2.0",
-    "node-fetch": "^2.1.2",
-    "nodemailer": "^4.6.5",
-    "twit": "^2.2.3"
+    "node-fetch": "^2.5.0",
+    "nodemailer": "^4.7.0",
+    "twit": "^2.2.11"
   },
   "engines": {
     "node": "10.x.x",
     "npm": "6.x.x"
   },
   "devDependencies": {
-    "husky": "^0.14.3",
-    "nodemon": "^1.17.5",
-    "prettier": "^1.12.1",
-    "pretty-quick": "^1.6.0",
-    "xo": "^0.21.1"
+    "husky": "^2.1.0",
+    "nodemon": "^1.19.0",
+    "prettier": "^1.17.0",
+    "pretty-quick": "^1.10.0",
+    "xo": "^0.24.0"
   },
   "xo": {
     "space": true,
     "prettier": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }

@@ -1,7 +1,7 @@
 const {exec} = require('child_process');
 const nodemon = require('nodemon');
 
-exec('heroku config', (error, stdout) => {
+exec('heroku config -a mattlewis-api', (error, stdout) => {
   const env = {
     NODE_ENV: 'development'
   };

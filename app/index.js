@@ -17,10 +17,10 @@ app
     // Error handler middleware
     try {
       await next();
-    } catch (err) {
-      ctx.status = err.status || 400;
-      ctx.body = {message: err.message};
-      ctx.app.emit('error', err, ctx);
+    } catch (error) {
+      ctx.status = error.status || 400;
+      ctx.body = {message: error.message};
+      ctx.app.emit('error', error, ctx);
     }
   })
   .use(responseTime())
@@ -40,6 +40,7 @@ app
         if (!item || new Date().getTime() - item.createdAt > maxAge) {
           return Promise.resolve();
         }
+
         return Promise.resolve(item.data);
       },
       set: (key, value) => {
