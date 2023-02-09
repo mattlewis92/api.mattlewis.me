@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "husky": "^2.7.0",
-    "nodemon": "^1.19.4",
+    "nodemon": "^2.0.20",
     "prettier": "^1.19.1",
     "pretty-quick": "^1.11.1",
     "xo": "^0.53.1"
